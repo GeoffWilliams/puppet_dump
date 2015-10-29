@@ -1,0 +1,14 @@
+{
+  "name": "geoffwilliams-puppet_dump",
+  "version": "0.1.0",
+  "author": "Geoff Williams <geoff.williams@puppetlabs.com>",
+  "summary": "dump out all of puppet's variables",
+  "license": "Apache-2.0",
+  "source": "https://github.com/GeoffWilliams/puppet_dump",
+  "project_page": "https://github.com/GeoffWilliams/puppet_dump",
+  "issues_url": "https://github.com/GeoffWilliams/puppet_dump/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
