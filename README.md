@@ -15,65 +15,49 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+A quick and dirty way of dumping out all in-scope puppet variables! :D
+
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
-
-## Setup
-
-### What dump affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+Supplies a resource type `puppet_dump` to print out all of the in-scope variables.  Title is used to indicate the poin the user-code that the resource type was invoked from.
 
 ### Beginning with dump
 
-The very basic steps needed for a user to get the module up and running.
+Just install the module and use the resource type in your code where you need to inspect variables.  Internally this uses the notify resource to report the variables to the user.  
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+Caution:  Will also log variables to console, so be careful if echoing sensitive data.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+```puppet
+puppet_dump { "point1": }
+```
+Print out the in-scope variables
 
-## Reference
+```puppet
+puppet_dump { "point2": }
+```
+Print out the in-scope variables again :D - this will take account of any new variables that have been set.
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+## Example output
+```shell
+Notice: /Stage[main]/Main/Puppet_dump[point1]/Notify[point1]/message: defined 'message' as '---
+aio_agent_build: 1.2.2
+aio_agent_version: 1.2.2
+architecture: i386
+augeas: '{"version"=>"1.4.0"}'
+augeasversion: 1.4.0
+...
+```
+Example (truncated) output.  Notice that the title `point1` which identifies the resource that generated the output.
+
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+No support, not recommended for sensitive or production environments
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+PRs accepted
 
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.

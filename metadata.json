@@ -1,6 +1,6 @@
 {
   "name": "geoffwilliams-puppet_dump",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Geoff Williams <geoff.williams@puppetlabs.com>",
   "summary": "dump out all of puppet's variables",
   "license": "Apache-2.0",
