@@ -1,4 +1,4 @@
-# dump
+# puppet_dump
 
 #### Table of Contents
 
@@ -15,12 +15,14 @@
 
 ## Overview
 
-A quick and dirty way of dumping out all in-scope puppet variables! :D
+A quick and dirty way of dumping out all in-scope puppet variables and configuration file settings! :D
 
 
 ## Module Description
 
-Supplies a resource type `puppet_dump` to print out all of the in-scope variables.  Title is used to indicate the poin the user-code that the resource type was invoked from.
+Supplies resource type `puppet_dump` to print out all of the in-scope variables and `puppet_dump::config` to print out all configuration file settings.
+
+Title is used to indicate the poin the user-code that the resource type was invoked from.
 
 ### Beginning with dump
 
@@ -30,6 +32,7 @@ Caution:  Will also log variables to console, so be careful if echoing sensitive
 
 ## Usage
 
+### Variables
 ```puppet
 puppet_dump { "point1": }
 ```
@@ -40,7 +43,15 @@ puppet_dump { "point2": }
 ```
 Print out the in-scope variables again :D - this will take account of any new variables that have been set.
 
+### Configuration
+```puppet
+puppet_dump::config { "main": }
+```
+Print out the configuration file variables by running `puppet config print`.  This is delivered using a `notify` resource so is available via the console reporting.
+
 ## Example output
+
+### Variables
 ```shell
 Notice: /Stage[main]/Main/Puppet_dump[point1]/Notify[point1]/message: defined 'message' as '---
 aio_agent_build: 1.2.2
@@ -52,6 +63,7 @@ augeasversion: 1.4.0
 ```
 Example (truncated) output.  Notice that the title `point1` which identifies the resource that generated the output.
 
+### Configuration
 
 ## Limitations
 
