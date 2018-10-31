@@ -1,11 +1,11 @@
-# @summary Dump all parsed config settings
+# @summary Dump the active puppet settings
 #
 # @example Perform a dump to the output stream
-#   puppet_dump::config { "point1": }
+#   puppet_dump::settings { "point1": }
 #
 # @example Dump settings to file
-#   puppet_dump::config { "point2:
-#     save_to => "/tmp/config.txt",
+#   puppet_dump::settings { "point2:
+#     save_to => "/tmp/settings.txt",
 #   }
 #
 # @param title
@@ -14,11 +14,11 @@
 #   If supplied, save debug output to this file
 # @param save_mode
 #   Permissions for dump file
-define puppet_dump::config(
-    Optional[String]  $save_to    = undef,
-    String            $save_mode  = "0640",
+define puppet_dump::settings(
+    Optional[String] $save_to   = undef,
+    String           $save_mode = "0640",
 ) {
-  $vars = inline_template("<%= a=%x{puppet config print} ; a  %>")
+  $vars = inline_template('<%= Puppet.settings.map { |k,v| "#{k}=>#{v.value}" }.to_yaml %>')
 
   if $save_to {
     file { $save_to:
@@ -30,10 +30,11 @@ define puppet_dump::config(
     }
   } else {
     $vars.split('\\n').each |$i,$e| {
-      notify { "puppet_dump::config ${title}:${i}":
+      notify { "puppet_dump::settings:${title}:${i}":
         message => $e,
       }
     }
   }
 
 }
+
