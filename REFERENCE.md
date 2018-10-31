@@ -23,6 +23,14 @@ Print out all the variables in scope using notify
 puppet_dump { "point1": }
 ```
 
+##### Dump settings to file
+
+```puppet
+puppet_dump { "point2":
+  save_to => "/tmp/config.txt",
+}
+```
+
 #### Parameters
 
 The following parameters are available in the `puppet_dump` defined type.
@@ -63,7 +71,7 @@ puppet_dump::config { "point1": }
 ##### Dump settings to file
 
 ```puppet
-puppet_dump::config { "point2:
+puppet_dump::config { "point2":
   save_to => "/tmp/config.txt",
 }
 ```
@@ -107,7 +115,7 @@ puppet_dump::settings { "point1": }
 ##### Dump settings to file
 
 ```puppet
-puppet_dump::settings { "point2:
+puppet_dump::settings { "point2":
   save_to => "/tmp/settings.txt",
 }
 ```

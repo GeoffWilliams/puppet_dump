@@ -3,6 +3,11 @@
 # @example Performing a dump
 #   puppet_dump { "point1": }
 #
+# @example Dump settings to file
+#   puppet_dump { "point2":
+#     save_to => "/tmp/config.txt",
+#   }
+#
 # @param title
 #   A unique name to identify the position in code that
 #   this dump was made at

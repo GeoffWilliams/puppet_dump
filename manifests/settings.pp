@@ -4,7 +4,7 @@
 #   puppet_dump::settings { "point1": }
 #
 # @example Dump settings to file
-#   puppet_dump::settings { "point2:
+#   puppet_dump::settings { "point2":
 #     save_to => "/tmp/settings.txt",
 #   }
 #
