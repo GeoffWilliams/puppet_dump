@@ -19,7 +19,10 @@ define puppet_dump(
     Optional[String]  $save_to    = undef,
     String            $save_mode  = "0640",
 ) {
-  $vars = inline_template("<%= facts = {}; scope.to_hash.each_pair {|k,v| facts[k.to_s] = v.to_s}; facts.to_yaml %>")
+
+  # get the facts + variables from our _parent_ scope (eg the caller...)
+  # otherwise we would be dumping our _own_variables, eg `save_to`, `save_mode`
+  $vars = inline_template("<%= vars = {}; scope.parent.to_hash.each_pair {|k,v| vars[k.to_s] = v.to_s}; vars.to_yaml %>")
 
   if $save_to {
     file { $save_to:
